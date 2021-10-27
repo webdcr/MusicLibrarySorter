@@ -10,11 +10,9 @@ FFP_ARTIST="artist"
 FIELDS="title,artist,album,date,genre"
 FFP_2="-print_format default=noprint_wrappers=1"
 
-ALL_DIR="Green"
-REQ_DIR="Yellow"
-NONE_DIR="Red"
+SORTED_DIR="Green"
+BAD_TAGS_DIR="Red"
 BROKEN_DIR="Red/Broken"
-COUNT="folders.txt"
 
 OUTPUT_DIR=$1
 FILE=$2
@@ -30,12 +28,11 @@ if [[ $FFP_EXCODE == 0 ]] ; then
   if [[ "$FIELDS_MATCH" =~ ^.*TAG:title=.*$ && "$FIELDS_MATCH" =~ ^.*TAG:artist=.*$ && \
   "$FIELDS_MATCH" =~ ^.*TAG:album=.*$ ]] ; then
 
-    # Check optional metadata, sort accordingly.
-    if [[ "$FIELDS_MATCH" =~ ^.*TAG:genre=.*$ && "$FIELDS_MATCH" =~ ^.*TAG:date=.*$ ]] ; then
-      mv -n "$FILE" "$OUTPUT_DIR/$ALL_DIR"
-    else 
-      mv -n "$FILE" "$OUTPUT_DIR/$REQ_DIR"
+    if [[ "$FIELDS_MATCH" =~ ^.*TAG:date=.*$ ]] ; then
+      echo "$FIELDS_MATCH"
     fi
+
+    mv -n "$FILE" "$OUTPUT_DIR/$SORTED_DIR"
   else
     mv -n "$FILE" "$OUTPUT_DIR/$NONE_DIR"
   fi

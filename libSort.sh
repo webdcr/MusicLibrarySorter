@@ -9,9 +9,8 @@
 
 KID_PATH="/Applications/kid3.app/Contents/MacOS/kid3-cli"
 
-ALL_DIR="Green"
-REQ_DIR="Yellow"
-NONE_DIR="Red"
+SORTED_DIR="Green"
+BAD_TAGS_DIR="Red"
 BROKEN_DIR="Red/Broken"
 
 
@@ -31,9 +30,8 @@ if [ $# -eq 2 ]; then
     fi
 
     # Make output directories, if they didn't exist before.
-    mkdir -p "$OUTPUTDIR/$ALL_DIR"
-    mkdir -p "$OUTPUTDIR/$REQ_DIR"
-    mkdir -p "$OUTPUTDIR/$NONE_DIR"
+    mkdir -p "$OUTPUTDIR/$SORTED_DIR"
+    mkdir -p "$OUTPUTDIR/$BAD_TAGS_DIR"
     mkdir -p "$OUTPUTDIR/$BROKEN_DIR"
 
     # Run script to check each song and move accordingly.
