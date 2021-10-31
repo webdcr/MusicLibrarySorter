@@ -3,7 +3,9 @@
 For stations like WebDCR with massive music libraries, manually sorting an unsorted folder can be impossible. This script automatically sorts music based on metadata tags.
 A bash script to sort through the station's music library of 40,000+ songs into properly tagged, improperly tagged, and untagged or broken mp3s
 
-Must run `brew install ffmpeg` before usage.
+Assumes usage of BASH.
+
+Must run `brew install ffmpeg` to install `ffprobe` before usage.
 
 ## Usage
 
@@ -13,7 +15,7 @@ This program will take an unsorted directory and move each of its music files to
 
 `./libSort -a inputDir outputDir`
 
-In addition to sorting, this script can add music to your Apple Music Library, if you set the `-a` option.
+In addition to sorting, this script can add music to your Apple Music Library, if you set the `-a` option. If the given file already exists in your library **at the exact same path**, it will not be added as a duplicate.
 
 ## Limitations
 
