@@ -10,8 +10,14 @@ OUTPUT_DIR = output
 run:
 	./libSort.sh $(INPUT_DIR) $(OUTPUT_DIR)
 
+# ./libSort.sh /Users/f003j38/Desktop/Music /Volumes/MusicLib/Music_Lib
+# ./libSort.sh -a /Volumes/MusicLib/Music_Lib /Volumes/MusicLib/Music_Lib
+
+run-and-add:
+	./libSort.sh -a $(INPUT_DIR) $(OUTPUT_DIR)
+
 test:
-	./libSort.sh $(OUTPUT_DIR) $(OUTPUT_DIR)
+	./libSort.sh $(INPUT_DIR) $(OUTPUT_DIR)
 
 clean:
 	rm -r -i $(OUTPUT)

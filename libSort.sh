@@ -9,12 +9,27 @@
 
 KID_PATH="/Applications/kid3.app/Contents/MacOS/kid3-cli"
 
-SORTED_DIR="Green"
-BAD_TAGS_DIR="Red"
-BROKEN_DIR="Red/Broken"
+SORTED_DIR="sorted"
+BAD_TAGS_DIR="bad-tags"
+BROKEN_DIR="bad-tags/broken"
+DO_SOFT=true
 
+if [[ $# -eq 2 || $# -eq 3 ]]; then
 
-if [ $# -eq 2 ]; then
+    # check for soft option!
+    while getopts "a" opt; do
+        case $opt in
+            a)
+                echo "-a: adding to library"
+                DO_SOFT=false
+                ;;
+            \?)
+                echo "Invalid option: -$OPTARG" >&2
+                ;;
+        esac
+    done
+    shift $((OPTIND-1))
+
     SOURCEDIR=$1
     OUTPUTDIR=$2
     
@@ -29,13 +44,8 @@ if [ $# -eq 2 ]; then
         exit 3
     fi
 
-    # Make output directories, if they didn't exist before.
-    mkdir -p "$OUTPUTDIR/$SORTED_DIR"
-    mkdir -p "$OUTPUTDIR/$BAD_TAGS_DIR"
-    mkdir -p "$OUTPUTDIR/$BROKEN_DIR"
-
     # Run script to check each song and move accordingly.
-    find $SOURCEDIR \( -name "*.mp3" -o -name "*.m4a" -name "*.wav" \) -exec ./checkSong.sh $OUTPUTDIR {} \;
+    find $SOURCEDIR \( -name "*.mp3" -o -name "*.m4a" -o -name "*.wav" -o -name "*.aiff" \) -exec ./checkSong.sh $OUTPUTDIR {} $DO_SOFT \;
 
 else
     echo "Incorrect number of arguments. Usage: ./musiclibsort.sh sourceDirectory outputDirectory"
