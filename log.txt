@@ -1,1 +1,0 @@
-# osascript -e "tell application \"Music\" to add \"/Volumes/MusicLib/Music_Lib/sorted/2020s/Holy Ship/Les Deux Regards/01 - Holy Ship - Giant Step, Small Leap.mp3\" to library playlist 1"
